@@ -26,17 +26,17 @@ public class BookController {
 	
 	private final BookService bookService;
 	
-	@GetMapping("/all")
+	@GetMapping("/book/all")
 	public ResponseEntity<ApiBaseResponse<List<Book>>> getAllBook(){
 		return ResponseEntity.ok(bookService.getAllBook());
 	}
 	
-	@PostMapping("/post")
+	@PostMapping("/book/post")
 	public ResponseEntity<ApiBaseResponse<Book>> createBook (@RequestBody BookDTO bookDTO) {
 		return ResponseEntity.ok(bookService.postBook(bookDTO));
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/book/{id}")
 	public ResponseEntity<ApiBaseResponse<Book>> getBookById (@PathVariable String id) {
 		return ResponseEntity.ok(bookService.getById(id));
 	}
