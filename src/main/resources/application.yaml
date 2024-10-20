@@ -1,0 +1,9 @@
+spring:
+  application:
+   name: lirbary_project
+  mvc:
+   pathmatch:
+    matching-strategy: ant-path-matcher
+  data:
+    mongodb:
+      database: LRIBARYPROJECT
