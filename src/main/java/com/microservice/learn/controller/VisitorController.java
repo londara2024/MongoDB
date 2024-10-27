@@ -2,6 +2,8 @@ package com.microservice.learn.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +45,11 @@ public class VisitorController {
 	@DeleteMapping("/visitor/delete/{id}")
 	public ResponseEntity<ApiBaseResponse<Visitor>> deleteVisitorById(@PathVariable String id) {
 		return ResponseEntity.ok(visitorService.deleteVisitoById(id));
+	}
+	
+	@GetMapping("/visitor/pagination")
+	public ResponseEntity<Page<Visitor>> getVisitorByPagination(Pageable p) {
+		return ResponseEntity.ok(visitorService.listVisitorPagination(p));
 	}
 	
 }

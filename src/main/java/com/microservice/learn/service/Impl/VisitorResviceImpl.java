@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +70,12 @@ public class VisitorResviceImpl implements VisitorService{
 		return  reponseObject("Deleted By ID :: { " + Id + " } Successfuuly!!!", visitor);
 	}
 	
+	@Override
+	public Page<Visitor> listVisitorPagination(Pageable p) {
+		// TODO Auto-generated method stub
+		return visitorRepository.findAll(p);
+	}
+	
 	private ApiBaseResponse<Visitor> reponseObject (String message, Visitor visitor){
 		ApiBaseResponse<Visitor> response = new ApiBaseResponse<>();
 		
@@ -95,7 +103,7 @@ public class VisitorResviceImpl implements VisitorService{
 		if (lstBook.size() > 0) {
 			for (BorrowBookDTO bb : lstBook) {
 				Book book = bookService.getById(bb.getLstBooksId()).getData();
-				BorrowBook borrowBook = new BorrowBook().builder()
+				BorrowBook borrowBook = BorrowBook.builder()
 						.book(book)
 						.bookCount(bb.getBookCount())
 						.total(getTotal(bb.getBookCount(), book.getBookPrice()))
@@ -115,5 +123,7 @@ public class VisitorResviceImpl implements VisitorService{
 		}
 		return null;
 	}
+
+	
 
 }
